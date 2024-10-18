@@ -1,3 +1,6 @@
+//loading 이후 bg를 lb로 변경
+$('body').css({ 'background-color': 'lightblue' });
+
 $(function () {
     $('.btn1')
         .on('mouseenter', function () {
