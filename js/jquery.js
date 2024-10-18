@@ -1,6 +1,6 @@
 $(function () {
     $('.btn1').on('click', function () {
-        $('.box1').hide();
+        $('.box1').toggle('slow');
     });
 });
 
