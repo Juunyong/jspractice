@@ -44,8 +44,9 @@ const lat = new OrderMenu('latte', 4000);
 lat.order();
 
 //class 사용
-class orderCoffee {
+class OrderCoffee {
     constructor(name, price) {
+        //생성자함수 - > 객체를 생성한다
         this.name = name;
         this.price = price;
     }
@@ -55,6 +56,28 @@ class orderCoffee {
     printCancel() {
         console.log(`${this.name}is soldout.`);
     }
+    make() {
+        console.log(`we make ${this.name} now.`);
+    }
 }
-const americanoofmenu = new orderCoffee('아메리카노', 3500);
+
+const lattemenu = new OrderCoffee('카페라떼', 4000);
+const americanoofmenu = new OrderCoffee('아메리카노', 3500);
 americanoofmenu.printCancel();
+americanoofmenu.make();
+lattemenu.printMenu();
+lattemenu.make();
+
+//extends로 클래스 상속하기
+class SpecialCoffee extends OrderCoffee {
+    constructor(name, price, character) {
+        super(name, price); //OrderCoffee에 있는 name과 price를 상속받는다.
+        this.character = character;
+    }
+    order() {
+        console.log(`${this.character} ${this.name} is ${this.price + 1500}won.`);
+    }
+}
+
+const americanoSpecial = new SpecialCoffee('아메리카노', 3500, 'minions');
+americanoSpecial.order();
