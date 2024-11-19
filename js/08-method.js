@@ -67,12 +67,28 @@ const h = user.find((item) => {
 
 console.log(h);
 
-const arr = [1, 2, 3];
-arr.forEach((item) => {
+const list = ['l1', 'l2', 'l3'];
+list.forEach((item) => {
     console.log(item);
 });
 
-const list = ['l1', 'l2', 'l3'];
-arr.forEach((item) => {
-    console.log(item);
-});
+const arr2 = [1, 2, 3];
+console.log(arr2.includes(1));
+console.log(arr2.includes(4));
+
+const user2 = [
+    { name: 'h', age: 12 },
+    { name: 'g', age: 6 },
+    { name: 'qq', age: 24 },
+];
+
+const newUsers = user2.map((item) => ({ ...item, email: null }));
+
+console.log(newUsers);
+
+console.log(arr2.pop()); // 마지막 아이만 출력해줌
+
+const totalAge = 54;
+
+const avgAge = totalAge / user2.length;
+console.log(avgAge);

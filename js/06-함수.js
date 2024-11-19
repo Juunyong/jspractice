@@ -86,3 +86,47 @@ const e = (x, y) => {
 
 const f = () => ({ name: 'winter' });
 const g = () => [1, 2, 3]; //중괄호를 전부 지워 축약해서 사용
+
+// 1119에 진행한 내용 - settimeout
+/*
+const timeover = setTimeout(() => {
+    console.log('3초 후 실행');
+}, 3000);
+
+document.querySelector('.btn1').addEventListener('click', () => {
+    console.log('buttonclick');
+    clearTimeout(timeover);
+});
+
+const aa = (callback) => {
+    callback();
+    console.log('aa');
+};
+
+const bb = () => {
+    console.log('bb');
+};
+*/
+//일반함수 this
+//일반함수는 호출 위치에서 this가 결정
+
+function userfullname() {
+    this.firstname = 'jun';
+    this.lastname = 'park';
+    return {
+        getFullName: () => {
+            return `${this.firstname} ${this.lastname}`;
+        },
+    };
+}
+
+const obj2 = {
+    firstname: '준용',
+    lastname: '박',
+    //메서드
+    fullname: function () {
+        return `${this.lastname} ${this.firstname} `;
+    },
+};
+
+console.log(ob2.fullname());
