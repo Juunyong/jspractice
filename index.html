@@ -3,10 +3,102 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script defer src="./js/09-비동기.js"></script>
         <title>Document</title>
     </head>
     <body>
-        <button class="btn1">stop</button>
+        <div class="container">
+            <div class="outer-circle" id="outer-text">바깥쪽 원</div>
+            <div class="middle-circle" id="middle-text">중간 원</div>
+            <div class="inner-circle" id="inner-text">안쪽 원</div>
+        </div>
     </body>
+    <style>
+        .container {
+            position: relative;
+            width: 300px; /* 가장 큰 원의 지름 */
+            height: 300px;
+            margin: 0 auto; /* 페이지 중앙에 컨테이너를 정렬 */
+        }
+
+        .outer-circle,
+        .middle-circle,
+        .inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            font-size: 16px; /* 글자 크기 */
+        }
+
+        .outer-circle {
+            width: 300px; /* 가장 큰 원의 지름 */
+            height: 300px;
+            background-color: rgba(0, 0, 255, 0.1); /* 배경색 */
+            animation: rotateReverse 20s linear infinite; /* 반대 방향 회전 */
+        }
+
+        .middle-circle {
+            width: 200px; /* 중간 원의 지름 */
+            height: 200px;
+            background-color: rgba(0, 255, 0, 0.1); /* 배경색 */
+            animation: rotate 15s linear infinite; /* 정방향 회전 */
+        }
+
+        .inner-circle {
+            width: 100px; /* 가장 작은 원의 지름 */
+            height: 100px;
+            background-color: rgba(255, 0, 0, 0.1); /* 배경색 */
+            animation: rotateReverse 10s linear infinite; /* 반대 방향 회전 */
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+    </style>
+    <script>
+        function createCircularText(elementId, radius) {
+            const textElement = document.getElementById(elementId);
+            const text = textElement.innerText.trim();
+            textElement.innerText = '';
+
+            const angleIncrement = 360 / text.length; // 각 문자 사이의 각도
+
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.innerText = char;
+
+                const angle = angleIncrement * index - 90; // -90 to start from top
+                const x = radius * Math.cos((angle * Math.PI) / 180);
+                const y = radius * Math.sin((angle * Math.PI) / 180);
+
+                span.style.position = 'absolute';
+                span.style.transform = `translate(${x}px, ${y}px) rotate(${angle + 90}deg)`;
+
+                textElement.appendChild(span);
+            });
+        }
+
+        // 각각의 원에 대해 텍스트를 생성합니다.
+        createCircularText('outer-text', 140); // 바깥쪽 원의 반지름
+        createCircularText('middle-text', 90); // 중간 원의 반지름
+        createCircularText('inner-text', 40); // 안쪽 원의 반지름
+    </script>
 </html>
